@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CommissionCalculator\Tests;
 
 use CommissionCalculator\App\Exception\ConfigException;
-use CommissionCalculator\App\Exception\CurrencyRateException;
+use CommissionCalculator\App\Exception\CurrencyRatesException;
 use CommissionCalculator\App\Model\Config;
 use CommissionCalculator\App\Service\CurrencyRatesProvider;
 use GuzzleHttp\Psr7\Utils;
@@ -66,7 +66,7 @@ class CurrencyRatesProviderTest extends TestCase
     /**
      * @return void
      * @throws ConfigException
-     * @throws CurrencyRateException
+     * @throws CurrencyRatesException
      * @throws ClientExceptionInterface
      */
     public function testGetRates(): void

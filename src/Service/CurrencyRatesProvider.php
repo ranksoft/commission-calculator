@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace CommissionCalculator\App\Service;
 
 use CommissionCalculator\App\Exception\ConfigException;
-use CommissionCalculator\App\Exception\CurrencyRateException;
+use CommissionCalculator\App\Exception\CurrencyRatesException;
 use CommissionCalculator\App\Interface\CurrencyRatesProviderInterface;
 use CommissionCalculator\App\Model\Config;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -39,7 +39,7 @@ class CurrencyRatesProvider implements CurrencyRatesProviderInterface
      * @return array<string>
      * @throws ClientExceptionInterface
      * @throws ConfigException
-     * @throws CurrencyRateException
+     * @throws CurrencyRatesException
      */
     public function getRates(): array
     {
@@ -51,10 +51,10 @@ class CurrencyRatesProvider implements CurrencyRatesProviderInterface
             $response = $this->client->sendRequest($request);
             $response = json_decode((string)$response->getBody(), true);
             if (!isset($response) || isset($response['message'])) {
-                throw new CurrencyRateException('Rates api request failed. Check the provider\'s API and try again.');
+                throw new CurrencyRatesException('Rates api request failed. Check the provider\'s API and try again.');
             }
             if (!isset($response['rates']) && is_array($response['rates'])) {
-                throw new CurrencyRateException('Rates in response are empty');
+                throw new CurrencyRatesException('Rates in response are empty');
             }
 
             return $response['rates'];

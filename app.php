@@ -26,7 +26,7 @@ $euCountriesProvider = new EuCountriesProvider($config, $fileLogger);
 $binProvider = new BinProvider($config, $client, $requestFactory, $fileLogger);
 $countryCodeProvider = new CountryCodeProvider($binProvider);
 $currencyRatesProvider = new CurrencyRatesProvider($config, $client, $requestFactory, $fileLogger);
-$currencyRateProvider = new CurrencyRateProvider($currencyRatesProvider);
+$currencyRateProvider = new CurrencyRateProvider($currencyRatesProvider, $fileLogger);
 $countryValidator = new CountryValidator($euCountriesProvider);
 $commissionCalculator = new CommissionCalculator($countryValidator, $currencyRateProvider, $countryCodeProvider, $config, $fileLogger);
 //TransactionProcessor is the class for work demonstrate transaction processor.
