@@ -23,6 +23,9 @@ class EuCountriesProvider implements CountryProviderInterface
         $this->logger = $logger;
     }
 
+    /**
+     * @return string[]
+     */
     public function getCountries(): array
     {
         try {
