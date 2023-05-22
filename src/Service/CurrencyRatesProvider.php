@@ -50,9 +50,9 @@ class CurrencyRatesProvider implements CurrencyRatesProviderInterface
             $request = $request->withHeader('apikey', $apiKey);
             $response = $this->client->sendRequest($request);
             $response = json_decode((string)$response->getBody(), true);
-            if (isset($response['message'])) {
+            if (!isset($response) || isset($response['message'])) {
                 $this->logger->error($response['message']);
-                throw new CurrencyRateException('Rates api request failed');
+                throw new CurrencyRateException('Rates api request failed. Check the provider\'s API and try again.');
             }
             if (!isset($response['rates']) && is_array($response['rates'])) {
                 throw new CurrencyRateException('Rates in response are empty');
